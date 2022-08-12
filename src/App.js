@@ -75,7 +75,7 @@ function App() {
         },
         random: false,
         speed: 2,
-        straight: true,
+        straight: false,
       },
       number: {
         density: {
