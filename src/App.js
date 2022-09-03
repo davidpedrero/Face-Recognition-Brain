@@ -7,14 +7,14 @@ import Rank from './Components/Rank/Rank'
 import './App.css';
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
-import Clarifai, { COLOR_MODEL } from 'clarifai';
+import Clarifai from 'clarifai';
 
 const app = new Clarifai.App({
   apiKey: 'df90a08a0f8146a885c07b428e06742a'
 });
 
-const particlesLoaded = (container) => {
-  console.log(container);
+const particlesLoaded = () => {
+  console.log("TS Particles deployed!");
 };
 
 const particleOptions = {
@@ -98,8 +98,18 @@ class App extends Component {
     super();
     this.state = {
       input: '',
-      imageUrl: ''
+      imageUrl: '',
+      box: {}
     }
+  }
+
+  calculateFaceLocation = (data) => {
+    // const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById('inputimage');
+    const width = Number(image.width);
+    const height = Number(image.height);
+
+    console.log(width, height)
   }
 
   onInputChange = (event) => {
@@ -110,16 +120,10 @@ class App extends Component {
     this.setState({imageUrl: this.state.input});
     app.models
     .predict(
-      Clarifai.COLOR_MODEL,
+      Clarifai.FACE_DETECT_MODEL,
       this.state.input)
-    .then(
-      function(response) {
-        console.log(response)
-      },
-      function(err) {
-
-      }
-    )
+    .then(response => this.calculateFaceLocation(response))
+    .catch(err => console.log(err))
   }
 
   render() {
