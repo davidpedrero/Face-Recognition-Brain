@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Navigation from './Components/Navigation/Navigation';
+import Signin from './Components/Signin/Signin';
 import FaceRecognition from './Components/FaceRecognition/FaceRecognition';
 import Logo from './Components/Logo/Logo'
 import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm'
@@ -154,6 +155,7 @@ class App extends Component {
           className='particles'
         />
         <Navigation />
+        <Signin />
         <Logo />
         <Rank />
         <ImageLinkForm 
