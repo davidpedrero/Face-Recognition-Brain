@@ -8,5 +8,5 @@ test('renders learn react link', () => {
 });
 
 function david() {
-  console.log("David is a G")
+  console.log("David is a top G")
 }
