@@ -99,7 +99,7 @@ const particleOptions = {
 }
 
 
-// React App section
+// React App section starts here
 
 class App extends Component {
   constructor() {
