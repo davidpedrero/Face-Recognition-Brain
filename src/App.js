@@ -9,14 +9,9 @@ import Rank from './Components/Rank/Rank'
 import './App.css';
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
-import Clarifai from 'clarifai';
 
 
 // TS Particles section
-
-const app = new Clarifai.App({
-  apiKey: 'df90a08a0f8146a885c07b428e06742a'
-});
 
 const particlesLoaded = () => {
   // console.log("TS Particles deployed!");
@@ -149,6 +144,7 @@ class App extends Component {
 
 
   calculateFaceLocation = (data) => {
+    console.log(data)
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputimage');
     const width = Number(image.width);
@@ -175,13 +171,18 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
-    app.models
-    .predict(
-      Clarifai.FACE_DETECT_MODEL,
-      this.state.input)
+
+    fetch('https://secure-eyrie-81296.herokuapp.com/imageurl', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        input: this.state.input
+      })
+    })
+    .then(response => response.json())
     .then(response =>  {
       if(response) {
-        fetch('http://localhost:3000/image', {
+        fetch('https://secure-eyrie-81296.herokuapp.com/image', {
           method: 'put',
           headers: {
             'Content-Type': 'application/json'
