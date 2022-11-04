@@ -144,13 +144,12 @@ class App extends Component {
 
 
   calculateFaceLocation = (data) => {
-    console.log(data)
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputimage');
     const width = Number(image.width);
     const height = Number(image.height);
 
-    console.log(clarifaiFace)
+    // console.log(clarifaiFace)
 
     return {
       leftCol: clarifaiFace.left_col * width,
@@ -184,9 +183,7 @@ class App extends Component {
       if(response) {
         fetch('https://secure-eyrie-81296.herokuapp.com/image', {
           method: 'put',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify({
             id: this.state.user.id
           })
@@ -213,8 +210,6 @@ class App extends Component {
 
   render() {
     const particlesInit = async (main) => {
-      // console.log(main); 
-
       await loadFull(main);
     };
 
