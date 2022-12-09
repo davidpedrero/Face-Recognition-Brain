@@ -171,7 +171,7 @@ class App extends Component {
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
 
-    fetch('https://secure-eyrie-81296.herokuapp.com/imageurl', {
+    fetch('https://face-recognition-brain-api.onrender.com/imageurl', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -181,7 +181,7 @@ class App extends Component {
     .then(response => response.json())
     .then(response =>  {
       if(response) {
-        fetch('https://secure-eyrie-81296.herokuapp.com/image', {
+        fetch('https://face-recognition-brain-api.onrender.com/image', {
           method: 'put',
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify({
